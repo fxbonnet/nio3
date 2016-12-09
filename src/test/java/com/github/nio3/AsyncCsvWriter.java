@@ -7,12 +7,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public final class MultithreadCsvWriter implements Closeable {
+public final class AsyncCsvWriter implements Closeable {
 	private final Writer writer;
 	private final char delimiter;
 	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-	public MultithreadCsvWriter(Writer writer, char delimiter) {
+	public AsyncCsvWriter(Writer writer, char delimiter) {
 		this.writer = writer;
 		this.delimiter = delimiter;
 	}

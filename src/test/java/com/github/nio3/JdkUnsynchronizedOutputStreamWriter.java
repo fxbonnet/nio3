@@ -80,9 +80,9 @@ import java.nio.charset.CharsetEncoder;
  * @since JDK1.1
  */
 
-public class FastOutputStreamWriter2 extends Writer {
+public class JdkUnsynchronizedOutputStreamWriter extends Writer {
 
-	private final StreamEncoder se;
+	private final JdkUnsynchronizedStreamEncoder se;
 
 	/**
 	 * Creates an OutputStreamWriter that uses the named charset.
@@ -97,11 +97,11 @@ public class FastOutputStreamWriter2 extends Writer {
 	 * @exception UnsupportedEncodingException
 	 *                If the named encoding is not supported
 	 */
-	public FastOutputStreamWriter2(OutputStream out, String charsetName) throws UnsupportedEncodingException {
+	public JdkUnsynchronizedOutputStreamWriter(OutputStream out, String charsetName) throws UnsupportedEncodingException {
 		super(out);
 		if (charsetName == null)
 			throw new NullPointerException("charsetName");
-		se = StreamEncoder.forOutputStreamWriter(out, this, charsetName);
+		se = JdkUnsynchronizedStreamEncoder.forOutputStreamWriter(out, this, charsetName);
 	}
 
 	/**
@@ -110,10 +110,10 @@ public class FastOutputStreamWriter2 extends Writer {
 	 * @param out
 	 *            An OutputStream
 	 */
-	public FastOutputStreamWriter2(OutputStream out) {
+	public JdkUnsynchronizedOutputStreamWriter(OutputStream out) {
 		super(out);
 		try {
-			se = StreamEncoder.forOutputStreamWriter(out, this, (String) null);
+			se = JdkUnsynchronizedStreamEncoder.forOutputStreamWriter(out, this, (String) null);
 		} catch (UnsupportedEncodingException e) {
 			throw new Error(e);
 		}
@@ -131,11 +131,11 @@ public class FastOutputStreamWriter2 extends Writer {
 	 * @since 1.4
 	 * @spec JSR-51
 	 */
-	public FastOutputStreamWriter2(OutputStream out, Charset cs) {
+	public JdkUnsynchronizedOutputStreamWriter(OutputStream out, Charset cs) {
 		super(out);
 		if (cs == null)
 			throw new NullPointerException("charset");
-		se = StreamEncoder.forOutputStreamWriter(out, this, cs);
+		se = JdkUnsynchronizedStreamEncoder.forOutputStreamWriter(out, this, cs);
 	}
 
 	/**
@@ -150,11 +150,11 @@ public class FastOutputStreamWriter2 extends Writer {
 	 * @since 1.4
 	 * @spec JSR-51
 	 */
-	public FastOutputStreamWriter2(OutputStream out, CharsetEncoder enc) {
+	public JdkUnsynchronizedOutputStreamWriter(OutputStream out, CharsetEncoder enc) {
 		super(out);
 		if (enc == null)
 			throw new NullPointerException("charset encoder");
-		se = StreamEncoder.forOutputStreamWriter(out, this, enc);
+		se = JdkUnsynchronizedStreamEncoder.forOutputStreamWriter(out, this, enc);
 	}
 
 	/**

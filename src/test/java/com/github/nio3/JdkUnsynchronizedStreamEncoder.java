@@ -42,7 +42,7 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.IllegalCharsetNameException;
 
-public class StreamEncoder extends Writer {
+public class JdkUnsynchronizedStreamEncoder extends Writer {
 
 	private static final int DEFAULT_BYTE_BUFFER_SIZE = 8192;
 
@@ -54,31 +54,31 @@ public class StreamEncoder extends Writer {
 	}
 
 	// Factories for java.io.OutputStreamWriter
-	public static StreamEncoder forOutputStreamWriter(OutputStream out, Object lock, String charsetName)
+	public static JdkUnsynchronizedStreamEncoder forOutputStreamWriter(OutputStream out, Object lock, String charsetName)
 			throws UnsupportedEncodingException {
 		String csn = charsetName;
 		if (csn == null)
 			csn = Charset.defaultCharset().name();
 		try {
 			if (Charset.isSupported(csn))
-				return new StreamEncoder(out, lock, Charset.forName(csn));
+				return new JdkUnsynchronizedStreamEncoder(out, lock, Charset.forName(csn));
 		} catch (IllegalCharsetNameException x) {
 		}
 		throw new UnsupportedEncodingException(csn);
 	}
 
-	public static StreamEncoder forOutputStreamWriter(OutputStream out, Object lock, Charset cs) {
-		return new StreamEncoder(out, lock, cs);
+	public static JdkUnsynchronizedStreamEncoder forOutputStreamWriter(OutputStream out, Object lock, Charset cs) {
+		return new JdkUnsynchronizedStreamEncoder(out, lock, cs);
 	}
 
-	public static StreamEncoder forOutputStreamWriter(OutputStream out, Object lock, CharsetEncoder enc) {
-		return new StreamEncoder(out, lock, enc);
+	public static JdkUnsynchronizedStreamEncoder forOutputStreamWriter(OutputStream out, Object lock, CharsetEncoder enc) {
+		return new JdkUnsynchronizedStreamEncoder(out, lock, enc);
 	}
 
 	// Factory for java.nio.channels.Channels.newWriter
 
-	public static StreamEncoder forEncoder(WritableByteChannel ch, CharsetEncoder enc, int minBufferCap) {
-		return new StreamEncoder(ch, enc, minBufferCap);
+	public static JdkUnsynchronizedStreamEncoder forEncoder(WritableByteChannel ch, CharsetEncoder enc, int minBufferCap) {
+		return new JdkUnsynchronizedStreamEncoder(ch, enc, minBufferCap);
 	}
 
 	// -- Public methods corresponding to those in OutputStreamWriter --
@@ -164,12 +164,12 @@ public class StreamEncoder extends Writer {
 	private char leftoverChar;
 	private CharBuffer lcb = null;
 
-	private StreamEncoder(OutputStream out, Object lock, Charset cs) {
+	private JdkUnsynchronizedStreamEncoder(OutputStream out, Object lock, Charset cs) {
 		this(out, lock, cs.newEncoder().onMalformedInput(CodingErrorAction.REPLACE)
 				.onUnmappableCharacter(CodingErrorAction.REPLACE));
 	}
 
-	private StreamEncoder(OutputStream out, Object lock, CharsetEncoder enc) {
+	private JdkUnsynchronizedStreamEncoder(OutputStream out, Object lock, CharsetEncoder enc) {
 		super(lock);
 		this.out = out;
 		this.ch = null;
@@ -187,7 +187,7 @@ public class StreamEncoder extends Writer {
 		}
 	}
 
-	private StreamEncoder(WritableByteChannel ch, CharsetEncoder enc, int mbc) {
+	private JdkUnsynchronizedStreamEncoder(WritableByteChannel ch, CharsetEncoder enc, int mbc) {
 		this.out = null;
 		this.ch = ch;
 		this.cs = enc.charset();
