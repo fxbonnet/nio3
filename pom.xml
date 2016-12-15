@@ -21,10 +21,5 @@
 			<artifactId>jsr305</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		<dependency>
-			<groupId>it.unimi.dsi</groupId>
-			<artifactId>fastutil</artifactId>
-			<version>7.0.13</version>
-		</dependency>
 	</dependencies>
 </project>

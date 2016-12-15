@@ -23,7 +23,7 @@
  *
  */
 
-package com.github.nio3;
+package com.github.nio3.jdkunsynchronized;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

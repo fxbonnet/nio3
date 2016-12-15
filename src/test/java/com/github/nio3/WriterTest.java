@@ -136,21 +136,21 @@ public class WriterTest {
 	@Test
 	public void test09() throws IOException {
 		tested = "new FastOutputStreamWriter(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter(fileOutputStream, UTF8);
+		writer = new FastOutputStreamWriterWithCharBufferAndByteChannel(fileOutputStream, UTF8);
 		test1char();
 	}
 
 	@Test
 	public void test10() throws IOException {
 		tested = "new FastOutputStreamWriter(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter(fileOutputStream, UTF8);
+		writer = new FastOutputStreamWriterWithCharBufferAndByteChannel(fileOutputStream, UTF8);
 		test1charString();
 	}
 
 	@Test
 	public void test11() throws IOException {
 		tested = "new FastOutputStreamWriter(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter(fileOutputStream, UTF8);
+		writer = new FastOutputStreamWriterWithCharBufferAndByteChannel(fileOutputStream, UTF8);
 		test100charString();
 	}
 
@@ -181,28 +181,28 @@ public class WriterTest {
 	@Test
 	public void test15() throws IOException {
 		tested = "new FastOutputStreamWriter3(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter3(fileOutputStream, UTF8);
+		writer = new FastOutputStreamWriterWithCharArrayAndByteChannel(fileOutputStream, UTF8);
 		test1char();
 	}
 
 	@Test
 	public void test16() throws IOException {
 		tested = "new FastOutputStreamWriter3(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter3(fileOutputStream, UTF8);
+		writer = new FastOutputStreamWriterWithCharArrayAndByteChannel(fileOutputStream, UTF8);
 		test1charString();
 	}
 
 	@Test
 	public void test17() throws IOException {
 		tested = "new FastOutputStreamWriter3(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter3(fileOutputStream, UTF8);
+		writer = new FastOutputStreamWriterWithCharArrayAndByteChannel(fileOutputStream, UTF8);
 		test100charString();
 	}
 
 	@Test
 	public void test18() throws Exception {
 		tested = "new FastOutputStreamWriter3(fileOutputStream, UTF8)";
-		writer = new FastOutputStreamWriter3(PATH, UTF8);
+		writer = new FastOutputStreamWriterWithCharArrayAndByteChannel(PATH, UTF8);
 		test100charString();
 		//Thread.sleep(1000);
 	}

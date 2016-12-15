@@ -26,7 +26,7 @@
 /*
  */
 
-package com.github.nio3;
+package com.github.nio3.jdkunsynchronized;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

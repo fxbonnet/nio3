@@ -6,14 +6,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Writer that writes in the wrapped Writer aynchroneously using a SingleThreadExecutor.
+ * Writer that writes in the wrapped Writer asynchronously using a
+ * SingleThreadExecutor.
  *
  */
 public class AsyncWriter extends Writer {
 	private final Writer writer;
 	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-	public AsyncWriter(Writer writer, char delimiter) {
+	public AsyncWriter(Writer writer) {
 		this.writer = writer;
 	}
 

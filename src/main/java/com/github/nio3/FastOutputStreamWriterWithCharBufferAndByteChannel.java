@@ -10,7 +10,7 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
-public final class FastOutputStreamWriter extends Writer {
+public final class FastOutputStreamWriterWithCharBufferAndByteChannel extends Writer {
 	private final static int DEFAULT_BUFFER_SIZE = 32768;
 	private final OutputStream outputStream;
 	private final WritableByteChannel channel;
@@ -19,11 +19,11 @@ public final class FastOutputStreamWriter extends Writer {
 	private final CharBuffer charBuffer;
 	private final ByteBuffer byteBuffer;
 
-	public FastOutputStreamWriter(OutputStream outputStream, Charset charset) {
+	public FastOutputStreamWriterWithCharBufferAndByteChannel(OutputStream outputStream, Charset charset) {
 		this(outputStream, charset, DEFAULT_BUFFER_SIZE);
 	}
 
-	public FastOutputStreamWriter(OutputStream outputStream, Charset charset, int bufferSize) {
+	public FastOutputStreamWriterWithCharBufferAndByteChannel(OutputStream outputStream, Charset charset, int bufferSize) {
 		this.outputStream = outputStream;
 		this.encoder = charset.newEncoder();
 		this.bufferSize = bufferSize;

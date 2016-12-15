@@ -13,8 +13,8 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
-public final class FastOutputStreamWriter3 extends Writer {
-	private final static int DEFAULT_BUFFER_SIZE = 32768;
+public final class FastOutputStreamWriterWithCharArrayAndByteChannel extends Writer {
+	private final static int DEFAULT_BUFFER_SIZE = 8192;
 	private final OutputStream outputStream;
 	private final WritableByteChannel channel;
 	private final int bufferSize;
@@ -23,19 +23,19 @@ public final class FastOutputStreamWriter3 extends Writer {
 	private int cPos = 0;
 	private final ByteBuffer byteBuffer;
 
-	public FastOutputStreamWriter3(OutputStream outputStream, Charset charset) {
+	public FastOutputStreamWriterWithCharArrayAndByteChannel(OutputStream outputStream, Charset charset) {
 		this(outputStream, charset, DEFAULT_BUFFER_SIZE);
 	}
 
-	public FastOutputStreamWriter3(OutputStream outputStream, Charset charset, int bufferSize) {
+	public FastOutputStreamWriterWithCharArrayAndByteChannel(OutputStream outputStream, Charset charset, int bufferSize) {
 		this(Channels.newChannel(outputStream), charset, bufferSize);
 	}
 
-	public FastOutputStreamWriter3(String path, Charset charset) throws IOException {
+	public FastOutputStreamWriterWithCharArrayAndByteChannel(String path, Charset charset) throws IOException {
 		this(path, charset, DEFAULT_BUFFER_SIZE);
 	}
 
-	public FastOutputStreamWriter3(final String path, Charset charset, int bufferSize) throws IOException {
+	public FastOutputStreamWriterWithCharArrayAndByteChannel(final String path, Charset charset, int bufferSize) throws IOException {
 		this(new WritableByteChannel() {
 			private final AsynchronousFileChannel channel = AsynchronousFileChannel.open(Paths.get(path),
 					StandardOpenOption.WRITE);
@@ -61,7 +61,7 @@ public final class FastOutputStreamWriter3 extends Writer {
 		}, charset, bufferSize);
 	}
 
-	public FastOutputStreamWriter3(WritableByteChannel channel, Charset charset, int bufferSize) {
+	public FastOutputStreamWriterWithCharArrayAndByteChannel(WritableByteChannel channel, Charset charset, int bufferSize) {
 		this.channel = channel;
 		this.encoder = charset.newEncoder();
 		this.bufferSize = bufferSize;
